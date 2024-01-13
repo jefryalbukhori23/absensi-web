@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
+
+});
+Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
+
+});
