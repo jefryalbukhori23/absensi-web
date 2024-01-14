@@ -11,7 +11,9 @@ class absensiController extends Controller
     public function absen(Request $request)
     {
         $request->validate([
-
+            'img' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         $absensi = absensi::where('date',date('Y-m-d'))->first();
@@ -24,5 +26,18 @@ class absensiController extends Controller
             $absensi = absensi::where('date',date('Y-m-d'))->first();
         }
         $data = new absensi_detail();
+        $data->id_absensi = $absensi->id;
+        $data->needs = $request->needs;
+        $data->status = $request->status;
+        $data->time = $request->time;
+        $data->latitude = $request->latitude;
+        $data->longitude = $request->longitude;
+        $logoPath = $request->file('img')->store('absen_image', 'public');
+        $data->photo = $logoPath;
+        $data->save();
+
+        return response()->json([
+            'msg' => 'success'
+        ], 200);
     }
 }
