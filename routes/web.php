@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\qrController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Auth.login');
 });
+
+Route::get('/qrCode', [qrController::class, 'index']);
+Route::get('/absen', [qrController::class, 'absen']);
 
 Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
 
