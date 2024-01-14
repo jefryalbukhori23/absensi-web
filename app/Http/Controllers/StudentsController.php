@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\students;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentsController extends Controller
 {
@@ -42,6 +44,13 @@ class StudentsController extends Controller
             // 'date_of_birth' => 'date',
             // 'telephone_number' => 'string|max:20',
         ]);
+
+        $user = new User();
+        $user->name = $request->fullname;
+        $user->email = $request->email;
+        $user->password = Hash::make('123456');
+        $user->role = 'student';
+        $user->save();
 
         // Menyimpan data ke dalam database
         $student = new students([
