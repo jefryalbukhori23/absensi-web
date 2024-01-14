@@ -9,6 +9,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function submit_token(Request $request)
+    {
+
+    }
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
