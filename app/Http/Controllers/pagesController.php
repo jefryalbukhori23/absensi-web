@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\absensi_setting;
+use App\Models\qrQode;
 use App\Models\schools;
 use Illuminate\Http\Request;
 
@@ -46,6 +48,11 @@ class pagesController extends Controller
     
     public function qrCode()
     {
-        return view('admins.qrCode');
+        $qr = qrQode::find(1);
+        $qr->qrQode = uniqid();
+        $qr->save();
+        return view('admins.qrCode')->with([
+            'qr' => $qr
+        ]);
     }
 }
