@@ -1,6 +1,6 @@
 <aside class="main-sidebar elevation-4" style="background-color: white; overflow-x: hidden;">
     <!-- Brand Logo -->
-    <a href="dashboard" class="brand-link">
+    <a href="/dashboard" class="brand-link">
       <div class="d-flex align-items-center justify-content-between" style="margin-right: 30px;">
         <img src="{{asset('assets/image/Absensi.png')}}"class="img-icon" alt="">
         <a class="bars" data-widget="pushmenu" href="#" role="button" style="width: fit-content;">
@@ -33,7 +33,7 @@
             <a href="sekolah" class="nav-link {{Request()->is('sekolah') ? 'active' : ''}}">
               <i class="fas fa-school"></i>
               <p>
-                School
+                Sekolah
               </p>
             </a>
           </li>

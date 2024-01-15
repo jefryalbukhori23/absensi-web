@@ -14,7 +14,12 @@ class pagesController extends Controller
     //
     public function dashboard()
     {
-        return view('admins.dashboard');
+        $students = students::all();
+        $schools = schools::all();
+        return view('admins.dashboard')->with([
+            'students' => $students,
+            'schools' => $schools
+        ]);
     }
     
     public function siswa()

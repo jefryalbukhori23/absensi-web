@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardUser;
 use App\Http\Controllers\qrController;
 use App\Http\Controllers\pagesController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,7 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/setting-jam', [pagesController::class, 'settingJam']);
     Route::resource('/setting_absensi', absensiSettingsController::class);
     Route::get('/get-jlm-siswa', [absensiController::class, 'get_jml_siswa']);
+    Route::get('/profile', [ProfilController::class, 'index']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 
