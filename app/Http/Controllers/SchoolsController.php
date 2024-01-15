@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\schools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+
+use function Laravel\Prompts\alert;
 
 class SchoolsController extends Controller
 {
@@ -32,7 +35,6 @@ class SchoolsController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'school_name' => 'required|string|max:255',
             'type_school' => 'required',
@@ -57,8 +59,14 @@ class SchoolsController extends Controller
 
         // Mengelola gambar logo jika diupload
         if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $school->logo = $logoPath;
+            $request->validate([
+                'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            ]);
+            $foto_file = $request->file('logo');
+            $foto_ekstensi = $foto_file->extension();
+            $foto_nama = date('ymdhis'). uniqid() . "." . $foto_ekstensi;
+            $foto_file->move(public_path('logos'), $foto_nama);
+            $school->logo = $foto_nama;
         }
 
         $school->save();
@@ -74,9 +82,7 @@ class SchoolsController extends Controller
     public function show(string $id)
     {
         $data = schools::find($id);
-        return response()->json([
-            'data' => $data
-        ], 200);
+        return response()->json($data);
     }
 
     /**
@@ -120,12 +126,12 @@ class SchoolsController extends Controller
 
         // Mengelola gambar logo jika diupload
         if ($request->hasFile('logo')) {
-            // Menghapus gambar lama (optional)
-            Storage::disk('public')->delete($school->logo);
-
-            // Menyimpan gambar baru
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $school->logo = $logoPath;
+            $foto_file = $request->file('logo');
+            $foto_ekstensi = $foto_file->extension();
+            $foto_nama = date('ymdhis'). uniqid() . "." . $foto_ekstensi;
+            $foto_file->move(public_path('logos'), $foto_nama);
+            $school->logo = $foto_nama;
+            File::delete(public_path('logos') . '/' . $school->logo);
             $school->save();
         }
 
@@ -140,7 +146,7 @@ class SchoolsController extends Controller
     public function destroy(string $id)
     {
         $data = schools::find($id);
-        Storage::disk('public')->delete($data->logo);
+        File::delete(public_path('logos') . '/' . $data->logo);
         $data->delete();
         return response()->json([
             'msg' => 'success'

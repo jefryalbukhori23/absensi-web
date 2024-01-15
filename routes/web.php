@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardUser;
 use App\Http\Controllers\qrController;
 use App\Http\Controllers\pagesController;
-use App\Http\Controllers\schoolController;
+use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/siswa', [pagesController::class, 'siswa']);
     Route::resource('/students', StudentsController::class);
     Route::get('/sekolah', [pagesController::class, 'sekolah']);
-    Route::resource('/schools', schoolController::class);
+    Route::resource('/schools', SchoolsController::class);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 

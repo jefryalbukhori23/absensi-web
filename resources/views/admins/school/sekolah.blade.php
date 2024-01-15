@@ -13,7 +13,7 @@
                 </button>
             </div>
             <div class="container">
-                <table class="w-100" id="table">
+                <table class="table w-100" id="table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -23,7 +23,7 @@
                         <th>Email</th>
                         <th>Telepon</th>
                         <th>Alamat</th>
-                        <th>Kepala Sekolah</th>
+                        <th>Pembimbing Pkl</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
