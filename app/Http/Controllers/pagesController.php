@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\absensi_setting;
 use App\Models\qrQode;
 use App\Models\schools;
+use App\Models\students;
 use Illuminate\Http\Request;
 
 class pagesController extends Controller
@@ -51,8 +52,12 @@ class pagesController extends Controller
         $qr = qrQode::find(1);
         $qr->qrQode = uniqid();
         $qr->save();
-        return view('admins.qrCode')->with([
-            'qr' => $qr
+        $siswa = students::all();
+        $sett = absensi_setting::find(1);
+        return view('admins.qrQode.qrCode')->with([
+            'qr' => $qr,
+            'siswa' => $siswa,
+            'sett' => $sett
         ]);
     }
 }

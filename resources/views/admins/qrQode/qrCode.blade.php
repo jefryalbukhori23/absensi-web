@@ -35,9 +35,9 @@
                         </svg>
                         <div class="d-flex flex-column items-center justify-content-start">
                             <p class="subHeader">Siswa Sudah Absen</p>
-                            <p class="number mb-3">20 Siswa</p>
+                            <p class="number mb-3"><span id="jml-siswa"></span> Siswa</p>
                             <p class="subHeader">Jumlah Siswa</p>
-                            <p class="number">20 Siswa</p>
+                            <p class="number">{{ $siswa->count() }} Siswa</p>
                         </div>
                     </div>
                     <div class="m-2 box-custom d-flex align-items-center jusitfy-content-center">
@@ -46,7 +46,7 @@
                         </svg>
                         <div class="d-flex flex-column items-center justify-content-start">
                             <p class="subHeader">Jam Masuk</p>
-                            <p class="number mb-3">08.00</p>
+                            <p class="number mb-3">{{ substr($sett->entry_time, 0, 5) }}</p>
                         </div>
                     </div>
                     <div class="m-2 box-custom d-flex align-items-center jusitfy-content-center">
@@ -55,7 +55,7 @@
                         </svg>
                         <div class="d-flex flex-column items-center justify-content-start">
                             <p class="subHeader">Jam Pulang</p>
-                            <p class="number mb-3">08.00</p>
+                            <p class="number mb-3">{{ substr($sett->home_time, 0, 5) }}</p>
                         </div>
                     </div>
                 </div>
@@ -65,4 +65,7 @@
     </section>
     <!-- /.content -->
 
+@endsection
+@section('script')
+    @include('admins.qrQode.script')
 @endsection

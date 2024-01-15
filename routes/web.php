@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\absensiController;
 use App\Http\Controllers\absensiSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardUser;
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::resource('/schools', SchoolsController::class);
     Route::get('/setting-jam', [pagesController::class, 'settingJam']);
     Route::resource('/setting_absensi', absensiSettingsController::class);
+    Route::get('/get-jlm-siswa', [absensiController::class, 'get_jml_siswa']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 
