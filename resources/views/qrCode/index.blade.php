@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p>qr yo</p>
+    {!! QrCode::generate(Request::url()); !!}
+    <p>{{$nomer}}</p>
 </body>
 </html>

@@ -14,12 +14,13 @@ class qrController extends Controller
     public function index()
     {
         //
-        $targetUrl = 'https://www.youtube.com/watch?v=Ik4PwlKMJsQ';
-        return QrCode::generate(
-            $targetUrl
-        );
+        $nomer = 'testing';
+        // $targetUrl = 'https://www.youtube.com/watch?v=Ik4PwlKMJsQ';
+        // return QrCode::generate(
+        //     $targetUrl, public_path('qrcodes/qrcode.png')
+        // );
 
-        return view('qrCode.index');
+        return view('qrCode.index', compact('nomer'));
     }
 
     public function absen()
