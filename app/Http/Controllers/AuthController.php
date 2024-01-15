@@ -9,15 +9,15 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function submit_token(Request $request)
+    public function index(Request $request)
     {
-
+        return view('Auth.login');
     }
 
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
