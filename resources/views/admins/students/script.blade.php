@@ -139,43 +139,126 @@
                         '<select class="form-control" name="id_school">' +
                         '<option value="" disabled> >> Pilih Seolah << </option>' +
                         '@foreach ($schools as $item)' +
-                        '<option value="{{ $item->id }}" ' + (response.id_school == "{{ $item->id }}" ? "selected" : "") +
-                    '>{{ $item->school_name }}</option>' +
+                        '<option value="{{ $item->id }}" ' + (response.id_school ==
+                            "{{ $item->id }}" ? "selected" : "") +
+                        '>{{ $item->school_name }}</option>' +
                         '@endforeach' +
                         '</select>' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="fullname">Nama Lengkap:</label>' +
-                        '<input type="text" class="form-control" id="fullname" value="'+response.fullname+'" name="fullname">' +
+                        '<input type="text" class="form-control" id="fullname" value="' +
+                        response.fullname + '" name="fullname">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="email">Email:</label>' +
-                        '<input type="email" class="form-control" id="email" value="'+response.email+'" name="email">' +
+                        '<input type="email" class="form-control" id="email" value="' +
+                        response.email + '" name="email">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="nisn">NISN:</label>' +
-                        '<input type="number" class="form-control" id="nisn" value="'+response.nisn+'" name="nisn">' +
+                        '<input type="number" class="form-control" id="nisn" value="' +
+                        response.nisn + '" name="nisn">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="gender">Jenis Kelamin:</label> <br>' +
-                        '<input type="radio" id="gender" value="L" '+(response.gender == "L" ? "checked" : "")+' name="gender"> Pria <br>' +
-                        '<input type="radio" id="gender" value="P" '+(response.gender == "P" ? "checked" : "")+' name="gender"> Wanita' +
+                        '<input type="radio" id="gender" value="L" ' + (response
+                            .gender == "L" ? "checked" : "") +
+                        ' name="gender"> Pria <br>' +
+                        '<input type="radio" id="gender" value="P" ' + (response
+                            .gender == "P" ? "checked" : "") +
+                        ' name="gender"> Wanita' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="place_birth">Tempat Lahir:</label>' +
-                        '<input type="text" value="'+response.place_birth+'" class="form-control" id="place_birth" name="place_birth">' +
+                        '<input type="text" value="' + response.place_birth +
+                        '" class="form-control" id="place_birth" name="place_birth">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="date_of_birth">Tanggal Lahir:</label>' +
-                        '<input type="date" value="'+response.date_of_birth+'" class="form-control" id="date_of_birth" name="date_of_birth">' +
+                        '<input type="date" value="' + response.date_of_birth +
+                        '" class="form-control" id="date_of_birth" name="date_of_birth">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="telephone_number">Nomor Telepon:</label>' +
-                        '<input type="number" value="'+response.telephone_number+'" class="form-control" id="telephone_number" name="telephone_number">' +
+                        '<input type="number" value="' + response.telephone_number +
+                        '" class="form-control" id="telephone_number" name="telephone_number">' +
                         '</div>' +
-                        '<div><button type="submit" class="btn btn-primary">Edit</button></div>'+
+                        '<div><button type="submit" class="btn btn-primary">Edit</button></div>' +
                         '</form>'
                     );
+
+                    // Tampilkan modal
+                    $('#edit').modal('show');
+
+                    // Mengirim permintaan Ajax untuk mengupdate data ketika form disubmit
+                    $('#editform').submit(function(event) {
+                        event.preventDefault();
+
+                        var overlay = $('.fullscreen-overlay');
+                        var loadingIcon = $('.loading-container');
+
+                        overlay.show(); // Menampilkan layar penuh
+                        loadingIcon.show(); // Menampilkan indikator loading
+
+                        var tombolKirim = $(this).find('button[type="submit"]');
+
+                        tombolKirim.prop('disabled', true);
+                        tombolKirim.css('display', 'none');
+
+                        var formData = new FormData(this);
+
+                        $.ajax({
+                            url: '/students/' + id,
+                            method: 'POST',
+                            data: formData, // Mengirim objek FormData
+                            processData: false, // Tidak memproses data secara otomatis
+                            contentType: false, // Mengabaikan tipe konten secara otomatis
+                            success: function(response) {
+                                console.log(response);
+                                $('#edit').modal('hide');
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: 'Berhasil Update Data Siswa',
+                                    timer: 900
+                                });
+                                table.ajax.reload();
+                                // location.reload();
+                            },
+                            error: function(error) {
+                                console.log(error);
+                                var errorText = 'Terjadi kesalahan';
+                                // Tampilkan pesan error jika ada
+                                if (error.responseJSON && error
+                                    .responseJSON.errors) {
+                                    var errorMessages = error
+                                        .responseJSON.errors;
+                                    for (var key in errorMessages) {
+                                        if (errorMessages
+                                            .hasOwnProperty(key)) {
+                                            errorText = errorMessages[
+                                                key][0];
+                                            break;
+                                        }
+                                    }
+                                }
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: errorText,
+                                });
+                            },
+                            complete: function() {
+                                tombolKirim.prop('disabled', false);
+                                overlay
+                            .hide(); // Menyembunyikan layar penuh
+                                loadingIcon
+                            .hide(); // Menyembunyikan indikator loading
+                                tombolKirim.show();
+                            }
+                        });
+                    });
                 },
                 error: function(error) {
                     console.log(error);
@@ -196,72 +279,6 @@
                         text: errorText,
                     });
                 }
-            });
-
-            // Tampilkan modal
-            $('#edit').modal('show');
-
-            // Mengirim permintaan Ajax untuk mengupdate data ketika form disubmit
-            $('#editform').submit(function(event) {
-                event.preventDefault();
-
-                var overlay = $('.fullscreen-overlay');
-                var loadingIcon = $('.loading-container');
-
-                overlay.show(); // Menampilkan layar penuh
-                loadingIcon.show(); // Menampilkan indikator loading
-
-                var tombolKirim = $(this).find('button[type="submit"]');
-
-                tombolKirim.prop('disabled', true);
-                tombolKirim.css('display', 'none');
-
-                var formData = new FormData(this);
-
-                $.ajax({
-                    url: '/students/' + id,
-                    method: 'POST',
-                    data: formData, // Mengirim objek FormData
-                    processData: false, // Tidak memproses data secara otomatis
-                    contentType: false, // Mengabaikan tipe konten secara otomatis
-                    success: function(response) {
-                        console.log(response);
-                        $('#edit').modal('hide');
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: 'Berhasil Update Data Siswa',
-                            timer: 900
-                        });
-                        table.ajax.reload();
-                        // location.reload();
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        var errorText = 'Terjadi kesalahan';
-                        // Tampilkan pesan error jika ada
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            var errorMessages = error.responseJSON.errors;
-                            for (var key in errorMessages) {
-                                if (errorMessages.hasOwnProperty(key)) {
-                                    errorText = errorMessages[key][0];
-                                    break;
-                                }
-                            }
-                        }
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: errorText,
-                        });
-                    },
-                    complete: function() {
-                        tombolKirim.prop('disabled', false);
-                        overlay.hide(); // Menyembunyikan layar penuh
-                        loadingIcon.hide(); // Menyembunyikan indikator loading
-                        tombolKirim.show();
-                    }
-                });
             });
         });
 

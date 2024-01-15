@@ -99,7 +99,7 @@ class StudentsController extends Controller
         // Validasi input
         $request->validate([
             'id_school' => 'required|integer',
-            'id_user' => 'required|integer',
+            // 'id_user' => 'required|integer',
             'fullname' => 'required|string|max:255',
             // 'nisn' => 'string|max:255',
             // 'gender' => 'in:L,P',
@@ -120,7 +120,6 @@ class StudentsController extends Controller
         // Memperbarui data siswa
         $student->update([
             'id_school' => $request->input('id_school'),
-            'id_user' => $request->input('id_user'),
             'fullname' => $request->input('fullname'),
             'nisn' => $request->input('nisn'),
             'gender' => $request->input('gender'),
