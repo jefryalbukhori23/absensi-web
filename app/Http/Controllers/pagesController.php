@@ -41,7 +41,7 @@ class pagesController extends Controller
     
     public function settingJam()
     {
-        return view('admins.settingJam');
+        return view('admins.setting_absensi.settingJam');
     }
     
     public function qrCode()

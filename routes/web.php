@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\absensiSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardUser;
 use App\Http\Controllers\qrController;
@@ -32,7 +33,6 @@ Route::get('/dashboard', [pagesController::class, 'dashboard']);
 // Route::get('/sekolah', [pagesController::class, 'sekolah']);
 Route::get('/per-siswa', [pagesController::class, 'perSiswa']);
 Route::get('/per-sekolah', [pagesController::class, 'perSekolah']);
-Route::get('/setting-jam', [pagesController::class, 'settingJam']);
 Route::get('/qrcode', [pagesController::class, 'qrCode']);
 Route::get('/absen', [qrController::class, 'absen'])->name('absen');
 
@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::resource('/students', StudentsController::class);
     Route::get('/sekolah', [pagesController::class, 'sekolah']);
     Route::resource('/schools', SchoolsController::class);
+    Route::get('/setting-jam', [pagesController::class, 'settingJam']);
+    Route::resource('/setting_absensi', absensiSettingsController::class);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 

@@ -12,7 +12,7 @@ class absensiSettingsController extends Controller
      */
     public function index()
     {
-        $data = absensi_setting::find(1);
+        $data = absensi_setting::all();
         return response()->json([
             'data' => $data
         ], 200);
@@ -39,7 +39,8 @@ class absensiSettingsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = absensi_setting::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -47,10 +48,6 @@ class absensiSettingsController extends Controller
      */
     public function edit(string $id)
     {
-        $data = absensi_setting::find($id);
-        return response()->json([
-            'data' => $data
-        ], 200);
     }
 
     /**
