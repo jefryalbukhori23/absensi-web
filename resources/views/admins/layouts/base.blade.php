@@ -9,6 +9,15 @@
     <img class="animation__shake" src="{{asset('assets/image/Absensi.png')}}" alt="AdminLTELogo">
   </div>
 
+  {{-- Overlay --}}
+  <div class="fullscreen-overlay" style="display: none;">
+    <div class="loading-container">
+        <img src="{{ asset('assets/image/puff.svg') }}" class="me-4" style="width: 3rem"
+            alt="audio">
+        Loading...
+    </div>
+  </div>
+
   <!-- Navbar -->
   @include('admins.layouts.navbar')
   <!-- /.navbar -->
@@ -68,6 +77,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -113,6 +123,7 @@
 <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready( function () {
@@ -121,5 +132,6 @@
         });
     } );
 </script>
+@yield('script')
 </body>
 </html>

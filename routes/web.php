@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardUser;
 use App\Http\Controllers\qrController;
 use App\Http\Controllers\pagesController;
+use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,6 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/qrCode', [qrController::class, 'index']);
 Route::get('/absen', [qrController::class, 'absen']);
 Route::get('/dashboard', [pagesController::class, 'dashboard']);
-Route::get('/siswa', [pagesController::class, 'siswa']);
 Route::get('/sekolah', [pagesController::class, 'sekolah']);
 Route::get('/per-siswa', [pagesController::class, 'perSiswa']);
 Route::get('/per-sekolah', [pagesController::class, 'perSekolah']);
@@ -37,6 +37,8 @@ Route::get('/absen', [qrController::class, 'absen'])->name('absen');
 
 Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/', [dashboardUser::class, 'index']);
+    Route::get('/siswa', [pagesController::class, 'siswa']);
+    Route::resource('/students', StudentsController::class);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 

@@ -1,16 +1,16 @@
 @extends('admins.layouts.base')
 
 @section('content')
-
+    @include('admins.students.modal')
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row flex-column">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal">
                 Tambah siswa
             </button>
-            <table class="dataTables">
+            <table class="w-100" id="tables">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -23,24 +23,14 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @for ($i = 1; $i <= 50; $i++)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>Nama Lengkap {{ $i }}</td>
-                            <td>NISN{{ $i }}</td>
-                            <td>Kelamin{{ $i }}</td>
-                            <td>Tempat Lahir{{ $i }}</td>
-                            <td>Tanggal Lahir{{ $i }}</td>
-                            <td>Telepon{{ $i }}</td>
-                            <td><button class="btn btn-primary">Aksi</button></td>
-                        </tr>
-                    @endfor
-                </tbody>
             </table>
         </div>
         <!-- /.row -->
     </section>
     <!-- /.content -->
 
+@endsection
+@section('script')
+@include('admins.students.script')
+    
 @endsection

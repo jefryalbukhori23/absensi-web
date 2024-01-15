@@ -36,8 +36,8 @@ class StudentsController extends Controller
         // Validasi input
         $request->validate([
             'id_school' => 'required|integer',
-            'id_user' => 'required|integer',
             'fullname' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
             // 'nisn' => 'string|max:255',
             // 'gender' => 'in:L,P',
             // 'place_birth' => 'string|max:255',
@@ -55,7 +55,7 @@ class StudentsController extends Controller
         // Menyimpan data ke dalam database
         $student = new students([
             'id_school' => $request->input('id_school'),
-            'id_user' => $request->input('id_user'),
+            'id_user' => $user->id,
             'fullname' => $request->input('fullname'),
             'nisn' => $request->input('nisn'),
             'gender' => $request->input('gender'),

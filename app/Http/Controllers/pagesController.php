@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\schools;
 use Illuminate\Http\Request;
 
 class pagesController extends Controller
@@ -15,7 +16,10 @@ class pagesController extends Controller
     
     public function siswa()
     {
-        return view('admins.siswa');
+        $data = schools::all();
+        return view('admins.students.siswa')->with([
+            'schools' => $data
+        ]);
     }
     
     public function sekolah()
