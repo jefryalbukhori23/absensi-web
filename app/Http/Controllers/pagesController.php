@@ -24,7 +24,10 @@ class pagesController extends Controller
     
     public function sekolah()
     {
-        return view('admins.sekolah');
+        $data = schools::all();
+        return view('admins.school.sekolah')->with([
+            'schools' => $data
+        ]);
     }
     public function perSiswa()
     {

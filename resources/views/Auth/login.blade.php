@@ -121,7 +121,7 @@
                             const user = data.user;
                             // toastr.success(`Selamat datang, ${data.user.name}`);
                             if (data.user.role == 'admin') {
-                                window.location.href = '/';
+                                window.location.href = '/dashboard';
                             } else if (data.user.role == 'student') {
                                 window.location.href ='/';
                             }
