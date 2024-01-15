@@ -1,4 +1,5 @@
-<div class="modal fade" id="tambahSiswaModal" tabindex="-1" role="dialog" aria-labelledby="tambahSiswaModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambahSiswaModal" tabindex="-1" role="dialog" aria-labelledby="tambahSiswaModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,16 +9,16 @@
                 </button>
             </div>
             <form id="add_form">
-            <div class="modal-body">
                 <div class="modal-body">
-                    <!-- Formulir untuk mengumpulkan data siswa -->
+                    <div class="modal-body">
+                        <!-- Formulir untuk mengumpulkan data siswa -->
                         @csrf
                         <div class="form-group">
                             <label for="id_school">Sekolah:</label>
                             <select class="form-control" name="id_school">
                                 <option value="" disabled selected> >> Pilih Seolah << </option>
-                                @foreach ($schools as $item)
-                                    <option value="{{ $item->id }}">{{ $item->school_name }}</option>
+                                        @foreach ($schools as $item)
+                                <option value="{{ $item->id }}">{{ $item->school_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -35,8 +36,8 @@
                         </div>
                         <div class="form-group">
                             <label for="gender">Jenis Kelamin:</label> <br>
-                            <input type="radio"  id="gender" value="L" name="gender"> Pria <br>
-                            <input type="radio"  id="gender" value="P" name="gender"> Wanita
+                            <input type="radio" id="gender" value="L" name="gender"> Pria <br>
+                            <input type="radio" id="gender" value="P" name="gender"> Wanita
                         </div>
                         <div class="form-group">
                             <label for="place_birth">Tempat Lahir:</label>
@@ -58,6 +59,24 @@
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+{{-- Edit --}}
+<div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Siswa</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="edit-isi">
+
+            </div>
         </div>
     </div>
 </div>

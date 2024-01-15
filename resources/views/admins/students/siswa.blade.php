@@ -10,7 +10,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal">
                 Tambah siswa
             </button>
-            <table class="w-100" id="tables">
+            <table class="table w-100" id="tables">
                 <thead>
                     <tr>
                         <th>No</th>

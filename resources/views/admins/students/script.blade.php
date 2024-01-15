@@ -1,3 +1,4 @@
+@include('admins.students.modal')
 <script>
     $(document).ready(function() {
         var table = $('#tables').DataTable({
@@ -37,11 +38,11 @@
                 {
                     data: null,
                     render: function(data, type, row) {
-                        return '<div class="d-flex"><button title="Edit Data" class="btn btn-warning btn-sm me-2" data-id="' +
+                        return '<div class="d-flex"><button title="Edit Data" class="btn btn-warning btn-sm mx-1" data-id="' +
                             data
-                            .id + '"data-kode="' + data.kode + '"data-name="' + data.name +
+                            .id +
                             '" data-bs-toggle="modal" data-bs-target="#edit"><i class="fas fa-edit"></i></button>' +
-                            '<button title="Hapus Data" class="btn btn-danger btn-sm me-2" data-id="' +
+                            '<button title="Hapus Data" class="btn btn-danger btn-sm mx-1" data-id="' +
                             data
                             .id +
                             '" ><i class="fas fa-trash"></i></button></div>';
@@ -85,8 +86,8 @@
                         text: 'Data Berhasil Ditambahkan',
                         timer: 900
                     });
-                    table.ajax.reload()
-                    $('#atambahSiswaModaldd').modal('hide');
+                    table.ajax.reload();
+                    $('#tambahSiswaModal').modal('hide');
                     $('#add_form')[0].reset();
                     console.log(response.message);
                     // location.reload();
@@ -123,31 +124,79 @@
         $('.table').on('click', '.btn-warning', function() {
             var id = $(this).data('id');
             var data = $(this).data();
-
-            // Menampilkan form edit pada modal
-            $('#edit-isi').html(
-                '<form action="" id="editform" enctype="multipart/form-data">' +
-                '@csrf' +
-                '@method('PUT')' +
-                '<div class="form-group">' +
-                '<label for="basicInput">Kode Satuan Unit</label>' +
-                '<input type="text" class="form-control rounded-3" id="basicInput"' +
-                'placeholder="Masukan Kode Satuan Unit" value="' + data.kode + '" name="kode">' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label for="basicInput">Nama Satuan Unit</label>' +
-                ' <input type="text" class="form-control rounded-3" id="basicInput"' +
-                ' placeholder="Masukan nama Satuan Unit" value="' + data.name + '" name="name">' +
-                '</div>' +
-                '<div class="col-lg-12 col-xl-12">' +
-                '<div class="mb-3">' +
-                '<button class="btn btn-primary" type="submit">Edit</button>' +
-                '</div>' +
-                '</div>' +
-                '</form>'
-            );
-
-            $('.img').dropify();
+            $.ajax({
+                url: '/students/' + id,
+                method: 'GET',
+                success: function(response) {
+                    console.log(response.gender)
+                    // Menampilkan form edit pada modal
+                    $('#edit-isi').html(
+                        '<form action="" id="editform" enctype="multipart/form-data">' +
+                        '@csrf' +
+                        '@method('PUT')' +
+                        '<div class="form-group">' +
+                        '<label for="id_school">Sekolah:</label>' +
+                        '<select class="form-control" name="id_school">' +
+                        '<option value="" disabled> >> Pilih Seolah << </option>' +
+                        '@foreach ($schools as $item)' +
+                        '<option value="{{ $item->id }}" ' + (response.id_school == "{{ $item->id }}" ? "selected" : "") +
+                    '>{{ $item->school_name }}</option>' +
+                        '@endforeach' +
+                        '</select>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="fullname">Nama Lengkap:</label>' +
+                        '<input type="text" class="form-control" id="fullname" value="'+response.fullname+'" name="fullname">' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="email">Email:</label>' +
+                        '<input type="email" class="form-control" id="email" value="'+response.email+'" name="email">' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="nisn">NISN:</label>' +
+                        '<input type="number" class="form-control" id="nisn" value="'+response.nisn+'" name="nisn">' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="gender">Jenis Kelamin:</label> <br>' +
+                        '<input type="radio" id="gender" value="L" '+(response.gender == "L" ? "checked" : "")+' name="gender"> Pria <br>' +
+                        '<input type="radio" id="gender" value="P" '+(response.gender == "P" ? "checked" : "")+' name="gender"> Wanita' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="place_birth">Tempat Lahir:</label>' +
+                        '<input type="text" value="'+response.place_birth+'" class="form-control" id="place_birth" name="place_birth">' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="date_of_birth">Tanggal Lahir:</label>' +
+                        '<input type="date" value="'+response.date_of_birth+'" class="form-control" id="date_of_birth" name="date_of_birth">' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label for="telephone_number">Nomor Telepon:</label>' +
+                        '<input type="number" value="'+response.telephone_number+'" class="form-control" id="telephone_number" name="telephone_number">' +
+                        '</div>' +
+                        '<div><button type="submit" class="btn btn-primary">Edit</button></div>'+
+                        '</form>'
+                    );
+                },
+                error: function(error) {
+                    console.log(error);
+                    var errorText = 'Terjadi kesalahan';
+                    // Tampilkan pesan error jika ada
+                    if (error.responseJSON && error.responseJSON.errors) {
+                        var errorMessages = error.responseJSON.errors;
+                        for (var key in errorMessages) {
+                            if (errorMessages.hasOwnProperty(key)) {
+                                errorText = errorMessages[key][0];
+                                break;
+                            }
+                        }
+                    }
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: errorText,
+                    });
+                }
+            });
 
             // Tampilkan modal
             $('#edit').modal('show');
@@ -170,7 +219,7 @@
                 var formData = new FormData(this);
 
                 $.ajax({
-                    url: '/get_satuan_unit/' + id,
+                    url: '/students/' + id,
                     method: 'POST',
                     data: formData, // Mengirim objek FormData
                     processData: false, // Tidak memproses data secara otomatis
@@ -181,7 +230,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Berhasil Update Data Vendor',
+                            text: 'Berhasil Update Data Siswa',
                             timer: 900
                         });
                         table.ajax.reload();
@@ -224,7 +273,7 @@
             // Tampilkan konfirmasi penghapusan menggunakan Swal Alert
             Swal.fire({
                 title: 'Konfirmasi Hapus',
-                text: 'Anda yakin ingin menghapus data ini?',
+                text: 'Anda yakin ingin menghapus data siswa ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -235,7 +284,7 @@
                 if (result.isConfirmed) {
                     // Jika pengguna mengonfirmasi penghapusan, kirim permintaan Ajax ke server untuk menghapus data
                     $.ajax({
-                        url: '/get_satuan_unit/' + id,
+                        url: '/students/' + id,
                         type: 'DELETE',
                         headers: {
                             // Menambahkan token CSRF ke header permintaan

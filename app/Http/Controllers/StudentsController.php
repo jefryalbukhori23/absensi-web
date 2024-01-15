@@ -75,10 +75,12 @@ class StudentsController extends Controller
      */
     public function show(string $id)
     {
-        $data = students::find($id);
-        return response()->json([
-            'data' => $data
-        ], 200);
+        $data = students::join('users','students.id_user','users.id')
+        ->select('students.*','users.email')
+        ->where('students.id',$id)
+        ->first();
+        // dd($data);
+        return response()->json($data);
     }
 
     /**
@@ -106,8 +108,14 @@ class StudentsController extends Controller
             // 'telephone_number' => 'string|max:20',
         ]);
 
+        
         // Mengambil data siswa berdasarkan ID
         $student = students::findOrFail($id);
+        
+        $user = User::find($student->id_user);
+        $user->name = $request->fullname;
+        $user->email = $request->email;
+        $user->save();
 
         // Memperbarui data siswa
         $student->update([
@@ -132,6 +140,8 @@ class StudentsController extends Controller
     public function destroy(string $id)
     {
         $data = students::find($id);
+        $user = User::find($data->id_user);
+        $user->delete();
         $data->delete();
         return response()->json([
             'message' => 'success'
