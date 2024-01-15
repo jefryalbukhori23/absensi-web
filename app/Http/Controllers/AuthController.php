@@ -54,13 +54,13 @@ class AuthController extends Controller
 
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
 
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+        // $request->session()->regenerateToken();
 
         return redirect('/'); // Ganti dengan halaman yang ingin Anda tampilkan setelah logout
     }

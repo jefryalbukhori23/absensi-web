@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/masuk', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/qrCode', [qrController::class, 'index']);
 Route::get('/absen', [qrController::class, 'absen']);
