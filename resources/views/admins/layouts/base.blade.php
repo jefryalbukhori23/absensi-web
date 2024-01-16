@@ -6,7 +6,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{asset('assets/image/Absensi.png')}}" alt="AdminLTELogo">
+    <img class="animation__shake" src="{{asset('assets/image/ds.png')}}" alt="AdminLTELogo">
   </div>
 
   {{-- Overlay --}}

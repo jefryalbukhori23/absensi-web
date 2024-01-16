@@ -1,3 +1,3 @@
 <footer class="main-footer" style="text-align: center;">
-    <strong>Copyright &copy; 2014 Absensi
+    <strong>Copyright &copy; 2024 Absensi
   </footer>

@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row flex-column">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahSiswaModal">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Tambah siswa
             </button>
             <table class="table w-100" id="tables">

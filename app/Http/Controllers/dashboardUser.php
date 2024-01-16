@@ -8,6 +8,6 @@ class dashboardUser extends Controller
 {
     public function index()
     {
-        return 'Halo';
+        return redirect('/dashboard');
     }
 }
