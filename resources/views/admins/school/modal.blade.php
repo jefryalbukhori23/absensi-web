@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="add_form" method="POST">
+            <form id="add_form" method="POST" class="p-2">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
@@ -18,10 +18,20 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Tipe Sekolah</label><br>
-                        <input class="" type="radio" name="type_school" id="gridRadios1" value="Negeri">
-                        Negeri <br>
-                        <input class="" type="radio" name="type_school" id="gridRadios2" value="Swasta">
-                        Swasta
+                        <div class="d-flex align-items-center justify-content-start">
+                            <div class="form-check d-flex align-items-center mr-5">
+                                <input class="form-check-input custom" type="radio" name="type_school" id="gridRadios1" value="Negeri">
+                                <label for="gridRadios1" class="form-check-label">
+                                    Negeri
+                                </label>
+                            </div>
+                            <div class="form-check d-flex align-items-center ml-5">
+                                <input class="form-check-input custom" type="radio" name="type_school" id="gridRadios2" value="Swasta">
+                                <label for="gridRadios2" class="form-check-label">
+                                    Swasta
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">NPSN</label>
@@ -42,17 +52,20 @@
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Pembimbing PKL</label>
                         <input type="text" class="form-control" id="headmaster" name="headmaster"
-                            placeholder="Pembimbing PKL">
+                        placeholder="Pembimbing PKL">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Logo Sekolah</label>
-                        <input type="file" class="form-control" id="logo" name="logo"
-                            placeholder="Logo Sekolah">
+                        <div class="custom-file">
+                            <label for="recipient-name" class="custom-file-label">Masukkan Logo</label>
+                            <input type="file" class="custom-file-input" id="logo" name="logo"
+                                placeholder="Logo Sekolah">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="w-100 btn btn-custom">Simpan</button>
+                    <button type="button" class="w-100 btn btn-transparent" data-dismiss="modal">Tutup</button>
                 </div>
             </form>
         </div>

@@ -13,15 +13,15 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li class="nav-item {{Request()->is('dashboard') ? 'active' : ''}}">
             <a href="/dashboard" class="nav-link {{Request()->is('dashboard') ? 'active' : ''}}">
-              <i class="nav-icon fas fa-home"></i>
+              <i class="nav-icon fas fa-home" style="transform: translateX(-5px);"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{Request()->is('siswa') ? 'active' : ''}}">
             <a href="/siswa" class="nav-link {{Request()->is('siswa') ? 'active' : ''}}">
               <i class="fas fa-user-friends"></i>
               <p>
@@ -29,7 +29,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{Request()->is('sekolah') ? 'active' : ''}}">
             <a href="sekolah" class="nav-link {{Request()->is('sekolah') ? 'active' : ''}}">
               <i class="fas fa-school"></i>
               <p>
@@ -37,7 +37,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item menu-open">
+          <li class="nav-item {{Request()->is('per-siswa') || Request()->is('per-sekolah') ? 'active menu-open' : ''}}">
             <a href="#" class="nav-link {{Request()->is('per-siswa') || Request()->is('per-sekolah') ? 'active' : ''}}">
               <i class="fas fa-file"></i>
               <p>
@@ -46,19 +46,19 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item sub-item {{Request()->is('per-siswa') ? 'active' : ''}}">
                 <a href="per-siswa" class="nav-link {{Request()->is('per-siswa') ? 'active' : ''}}">
                   <p>Per Siswa</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item sub-item {{Request()->is('per-sekolah') ? 'active' : ''}}">
                 <a href="per-sekolah" class="nav-link {{Request()->is('per-sekolah') ? 'active' : ''}}">
                   <p>Per Sekolah</p>
                 </a>
               </li>
             </ul>
           </li> 
-          <li class="nav-item">
+          <li class="nav-item {{Request()->is('setting-jam') ? 'active' : ''}}">
             <a href="setting-jam" class="nav-link {{Request()->is('setting-jam') ? 'active' : ''}}">
               <i class="fas fa-clock"></i>
               <p>
@@ -66,7 +66,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{Request()->is('qrcode') ? 'active' : ''}}">
             <a href="qrcode" class="nav-link {{Request()->is('qrcode') ? 'active' : ''}}">
               <i class="fas fa-qrcode"></i>
               <p>

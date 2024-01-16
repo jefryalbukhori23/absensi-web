@@ -1,6 +1,12 @@
 <script>
     $(document).ready(function() {
         var table = $('#table').DataTable({
+            initComplete: function () {
+                // Menyesuaikan elemen pencarian setelah tabel selesai diinisialisasi
+                $('.dataTables_filter label').append('<i class="position-absolute fas fa-search" style="left: 15px; top: 15px; color: #BDBDBD"></i>');
+                $('.dataTables_length label').append('<button type="button" class="btn btn-custom" data-toggle="modal" data-target="#exampleModal">Tambah siswa</button>');
+                $('.dataTables_filter input').attr('placeholder', 'Cari...');
+            },
             responsive: true,
             processing: false,
             serverSide: false,

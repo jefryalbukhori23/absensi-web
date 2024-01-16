@@ -7,6 +7,7 @@ use App\Http\Controllers\dashboardUser;
 use App\Http\Controllers\qrController;
 use App\Http\Controllers\pagesController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\scanController;
 use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::get('/per-siswa', [pagesController::class, 'perSiswa']);
 Route::get('/per-sekolah', [pagesController::class, 'perSekolah']);
 Route::get('/qrcode', [pagesController::class, 'qrCode']);
 Route::get('/absen', [qrController::class, 'absen'])->name('absen');
+Route::get('/cameraScan', [scanController::class, 'scan']);
 
 Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/', [dashboardUser::class, 'index']);
