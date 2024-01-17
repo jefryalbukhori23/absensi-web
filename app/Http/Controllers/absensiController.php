@@ -79,9 +79,52 @@ class absensiController extends Controller
         $absensi = absensi_setting::find(1);
         $now = date('H:i:s');
         if($now < $absensi->home_entry){
-            $data = absensi_detail::where('id_absensi',$absensi->id)->where('needs','D')->get();
+            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','D')
+            ->select('absensi_details.*','students.fullname','students.nisn')
+            ->get();
         }else{
-            $data = absensi_detail::where('id_absensi',$absensi->id)->where('needs','P')->get();
+            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->where('absensi_details.id_absensi',$absensi->id)->where('absensi_details.needs','P')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','D')
+            ->select('absensi_details.*','students.fullname','students.nisn')
+            ->get();;
+        }
+
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
+
+    public function get_data_absensi_persekolah()
+    {
+        $absensi = absensi::where('date',date('Y-m-d'))->first();
+        if(!$absensi)
+        {
+            $new_absensi = new absensi();
+            $new_absensi->date = date('Y-m-d');
+            $new_absensi->total_students = 0;
+            $new_absensi->save();
+            $absensi = absensi::where('date',date('Y-m-d'))->first();
+        }
+        $absensi = absensi_setting::find(1);
+        $now = date('H:i:s');
+        if($now < $absensi->home_entry){
+            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->join('schools','students.id_school','schools.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','D')
+            ->select('absensi_details.*','schools.school_name')
+            ->get();
+        }else{
+            $data = absensi_detail::join('students','absensi_details.id_student','students.id')
+            ->join('schools','students.id_school','schools.id')
+            ->where('absensi_details.id_absensi',$absensi->id)
+            ->where('absensi_details.needs','P')
+            ->select('absensi_details.*','schools.school_name')
+            ->get();;
         }
 
         return response()->json([

@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/pengguna', [ProfilController::class, 'pengguna']);
     Route::get('/cek_users/{id}', [ProfilController::class, 'cek_users']);
     Route::get('/get_data_absensi', [absensiController::class, 'get_data_absensi']);
+    Route::get('/get_data_absensi_persekolah', [absensiController::class, 'get_data_absensi_persekolah']);
     Route::get('/profil-admin', [testController::class, 'profilAdmin']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {

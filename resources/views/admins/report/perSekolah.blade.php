@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row flex-column">
-            <table class="table w-100" id="tables">
+            <table class="table w-100" id="tables2">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -19,7 +19,6 @@
                         <th>Foto</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
             </table>

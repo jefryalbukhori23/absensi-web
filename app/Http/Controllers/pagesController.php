@@ -39,12 +39,12 @@ class pagesController extends Controller
     }
     public function perSiswa()
     {
-        return view('admins.perSiswa');
+        return view('admins.report.perSiswa');
     }
     
     public function perSekolah()
     {
-        return view('admins.perSekolah');
+        return view('admins.report.perSekolah');
     }
     
     public function settingJam()

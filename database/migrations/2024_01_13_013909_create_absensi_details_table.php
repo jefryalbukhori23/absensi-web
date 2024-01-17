@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('absensi_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_absensi');
+            $table->bigInteger('id_student');
             $table->string('needs'); // D (datang), P (Pulang)
             $table->string('status'); // Tepat,Telat
             $table->time('time');
