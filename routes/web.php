@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\scanController;
 use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\testController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,7 +56,8 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/pengguna', [ProfilController::class, 'pengguna']);
     Route::get('/cek_users/{id}', [ProfilController::class, 'cek_users']);
     Route::get('/get_data_absensi', [absensiController::class, 'get_data_absensi']);
+    Route::get('/profil-admin', [testController::class, 'profilAdmin']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
-
+    Route::get('/profil-user', [testController::class, 'profilUser']);
 });
