@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::resource('/users', userController::class);
     Route::get('/pengguna', [ProfilController::class, 'pengguna']);
     Route::get('/cek_users/{id}', [ProfilController::class, 'cek_users']);
+    Route::get('/get_data_absensi', [absensiController::class, 'get_data_absensi']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 

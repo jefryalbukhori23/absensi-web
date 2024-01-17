@@ -64,4 +64,28 @@ class absensiController extends Controller
 
         return response()->json($data->count());
     }
+
+    public function get_data_absensi()
+    {
+        $absensi = absensi::where('date',date('Y-m-d'))->first();
+        if(!$absensi)
+        {
+            $new_absensi = new absensi();
+            $new_absensi->date = date('Y-m-d');
+            $new_absensi->total_students = 0;
+            $new_absensi->save();
+            $absensi = absensi::where('date',date('Y-m-d'))->first();
+        }
+        $absensi = absensi_setting::find(1);
+        $now = date('H:i:s');
+        if($now < $absensi->home_entry){
+            $data = absensi_detail::where('id_absensi',$absensi->id)->where('needs','D')->get();
+        }else{
+            $data = absensi_detail::where('id_absensi',$absensi->id)->where('needs','P')->get();
+        }
+
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
 }
