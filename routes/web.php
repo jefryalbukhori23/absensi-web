@@ -34,16 +34,12 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/qrCode', [qrController::class, 'index']);
 Route::get('/absen', [qrController::class, 'absen']);
-Route::get('/dashboard', [pagesController::class, 'dashboard']);
 // Route::get('/sekolah', [pagesController::class, 'sekolah']);
-Route::get('/per-siswa', [pagesController::class, 'perSiswa']);
-Route::get('/per-sekolah', [pagesController::class, 'perSekolah']);
-Route::get('/qrcode', [pagesController::class, 'qrCode']);
 Route::get('/absen', [qrController::class, 'absen'])->name('absen');
-Route::get('/cameraScan', [scanController::class, 'scan']);
 
 Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/', [dashboardUser::class, 'index']);
+    Route::get('/dashboard', [pagesController::class, 'dashboard']);
     Route::get('/siswa', [pagesController::class, 'siswa']);
     Route::resource('/students', StudentsController::class);
     Route::get('/sekolah', [pagesController::class, 'sekolah']);
@@ -58,7 +54,13 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/get_data_absensi', [absensiController::class, 'get_data_absensi']);
     Route::get('/get_data_absensi_persekolah', [absensiController::class, 'get_data_absensi_persekolah']);
     Route::get('/profil-admin', [testController::class, 'profilAdmin']);
+    Route::get('/per-siswa', [pagesController::class, 'perSiswa']);
+    Route::get('/per-sekolah', [pagesController::class, 'perSekolah']);
+    Route::get('/qrcode', [pagesController::class, 'qrCode']);
+    Route::get('/cek_scan', [scanController::class, 'cekscan']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
     Route::get('/profil-user', [testController::class, 'profilUser']);
+    Route::get('/cameraScan', [scanController::class, 'scan']);
+    Route::get('/addscan/{kode}', [scanController::class, 'addscan']);
 });

@@ -123,7 +123,7 @@
                             if (data.user.role == 'admin') {
                                 window.location.href = '/dashboard';
                             } else if (data.user.role == 'student') {
-                                window.location.href ='/profil-user';
+                                window.location.href ='/cameraScan';
                             }
                             // Redirect or handle successful login
                         } else {

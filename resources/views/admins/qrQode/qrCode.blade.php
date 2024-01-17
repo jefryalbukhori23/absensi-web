@@ -23,7 +23,7 @@
                     SABTU, 13 JANUARI 2024
                 </p>
                 <div class="box-qr">
-                    {!! QrCode::size(300)->generate(Request::url()); !!}
+                    {!! QrCode::size(300)->generate($qr->qrQode); !!}
                 </div>
                 <p class="subText">
                     Scan QR Code diatas

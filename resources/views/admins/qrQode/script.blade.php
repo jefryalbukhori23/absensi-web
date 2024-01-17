@@ -69,8 +69,28 @@
         });
     }
 
+    function cekScan()
+    {
+        $.ajax({
+            url: '/cek_scan', // Ganti dengan URL yang sesuai
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if(data.msg == 'success')
+                {
+                    // alert('ada', data.data.fullname)
+                    window.location.href="/foto/"+data.data.id+'/'+data.scan.id;
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
     // Panggil fungsi fetchData secara berkala setiap 5 detik
     setInterval(function() {
         fetchData();
+        cekScan();
     }, 5000); // 5000 milidetik = 5 detik
 </script>
