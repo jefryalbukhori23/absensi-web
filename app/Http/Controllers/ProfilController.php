@@ -10,11 +10,8 @@ class ProfilController extends Controller
     {
         return view('admins.profil.index');
     }
-
-    public function edit(Request $request)
+    public function pengguna()
     {
-        $request->validate([
-            'username' => 'required', 
-        ]);
+        return view('admins.users.index');
     }
 }

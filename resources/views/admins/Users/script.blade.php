@@ -5,7 +5,7 @@
             processing: false,
             serverSide: false,
             ajax: {
-                url: '/students',
+                url: '/users',
                 type: 'GET',
                 dataType: 'json',
             },
@@ -17,22 +17,10 @@
                     }
                 },
                 {
-                    data: "fullname",
+                    data: "name",
                 },
                 {
-                    data: "nisn",
-                },
-                {
-                    data: "gender",
-                },
-                {
-                    data: "place_birth",
-                },
-                {
-                    data: "date_of_birth",
-                },
-                {
-                    data: "telephone_number",
+                    data: "email",
                 },
                 {
                     data: null,
@@ -73,7 +61,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/students', // Ganti dengan URL rute Anda
+                url: '/users', // Ganti dengan URL rute Anda
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -124,7 +112,7 @@
             var id = $(this).data('id');
             var data = $(this).data();
             $.ajax({
-                url: '/students/' + id,
+                url: '/users/' + id,
                 method: 'GET',
                 success: function(response) {
                     console.log(response)
@@ -134,53 +122,18 @@
                         '@csrf' +
                         '@method('PUT')' +
                         '<div class="form-group">' +
-                        '<label for="recipient-name" class="col-form-label">Sekolah</label>' +
-                        '<select name="id_school" id="" class="form-control">' +
-                        '<option value="" disabled> -- Pilih Sekolah -- </option>' +
-                        '@foreach ($schools as $item)' +
-                        '<option value="{{ $item->id }}" @if($item->id === ' + response.id_school + ') selected @endif>{{ $item->school_name }}</option>' +
-                        '@endforeach' +
-                        '</select>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="recipient-name" class="col-form-label">Nama Siswa</label>' +
-                        '<input type="text" class="form-control" id="school_name" name="fullname" placeholder="Nama Siswa" value="' +
-                        response.fullname + '">' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="message-text" class="col-form-label">Jenis Kelamin</label><br>' +
-                        '<input class="" type="radio" name="gender" id="gridRadios1" value="L"' +
-                        (response.gender === 'L' ? ' checked' : '') + '>' +
-                        ' L <br>' +
-                        '<input class="" type="radio" name="gender" id="gridRadios2" value="P"' +
-                        (response.gender === 'P' ? ' checked' : '') + '>' +
-                        ' P' +
+                        '<label for="recipient-name" class="col-form-label">Nama</label>' +
+                        '<input type="text" class="form-control" id="school_name" name="name"' +
+                        'placeholder="Nama">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="recipient-name" class="col-form-label">Email</label>' +
-                        '<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="' +
-                        response.email + '">' +
+                        '<input type="email" class="form-control" id="email" name="email" placeholder="Email">' +
                         '</div>' +
                         '<div class="form-group">' +
-                        '<label for="recipient-name" class="col-form-label">Telepon</label>' +
-                        '<input type="number" class="form-control" id="telephone_number" name="telephone_number" placeholder="Telepon" value="' +
-                        response.telephone_number + '">' +
+                        '<label for="recipient-name" class="col-form-label">Password</label>' +
+                        '<input type="password" class="form-control" id="email" name="password" placeholder="Password">' +
                         '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="recipient-name" class="col-form-label">NISN</label>' +
-                        '<input type="number" class="form-control" id="nisn" name="nisn" placeholder="NISN" value="' +
-                        response.nisn + '">' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="recipient-name" class="col-form-label">Tempat Lahir</label>' +
-                        '<input type="text" class="form-control" id="place_birth" name="place_birth" placeholder="Tempat Lahir" value="' +
-                        response.place_birth + '">' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="recipient-name" class="col-form-label">Tanggal Lahir</label>' +
-                        '<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Tanggal Lahir" value="' +
-                        response.date_of_birth + '">' +
-                        '</div>'+
                         '<div><button type="submit" class="btn btn-primary">Edit</button></div>' +
                         '</form>'
                     );
@@ -206,7 +159,7 @@
                         var formData = new FormData(this);
 
                         $.ajax({
-                            url: '/students/' + id,
+                            url: '/users/' + id,
                             method: 'POST',
                             data: formData, // Mengirim objek FormData
                             processData: false, // Tidak memproses data secara otomatis
@@ -298,7 +251,7 @@
                 if (result.isConfirmed) {
                     // Jika pengguna mengonfirmasi penghapusan, kirim permintaan Ajax ke server untuk menghapus data
                     $.ajax({
-                        url: '/students/' + id,
+                        url: '/users/' + id,
                         type: 'DELETE',
                         headers: {
                             // Menambahkan token CSRF ke header permintaan

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\scanController;
 use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,8 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::resource('/setting_absensi', absensiSettingsController::class);
     Route::get('/get-jlm-siswa', [absensiController::class, 'get_jml_siswa']);
     Route::get('/profile', [ProfilController::class, 'index']);
+    Route::resource('/users', userController::class);
+    Route::get('/pengguna', [ProfilController::class, 'pengguna']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
 

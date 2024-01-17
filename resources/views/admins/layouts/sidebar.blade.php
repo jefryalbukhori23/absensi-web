@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item {{Request()->is('sekolah') ? 'active' : ''}}">
-            <a href="sekolah" class="nav-link {{Request()->is('sekolah') ? 'active' : ''}}">
+            <a href="/sekolah" class="nav-link {{Request()->is('sekolah') ? 'active' : ''}}">
               <i class="fas fa-school"></i>
               <p>
                 Sekolah
@@ -47,19 +47,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item sub-item {{Request()->is('per-siswa') ? 'active' : ''}}">
-                <a href="per-siswa" class="nav-link {{Request()->is('per-siswa') ? 'active' : ''}}">
+                <a href="/per-siswa" class="nav-link {{Request()->is('per-siswa') ? 'active' : ''}}">
                   <p>Per Siswa</p>
                 </a>
               </li>
               <li class="nav-item sub-item {{Request()->is('per-sekolah') ? 'active' : ''}}">
-                <a href="per-sekolah" class="nav-link {{Request()->is('per-sekolah') ? 'active' : ''}}">
+                <a href="/per-sekolah" class="nav-link {{Request()->is('per-sekolah') ? 'active' : ''}}">
                   <p>Per Sekolah</p>
                 </a>
               </li>
             </ul>
           </li> 
           <li class="nav-item {{Request()->is('setting-jam') ? 'active' : ''}}">
-            <a href="setting-jam" class="nav-link {{Request()->is('setting-jam') ? 'active' : ''}}">
+            <a href="/setting-jam" class="nav-link {{Request()->is('setting-jam') ? 'active' : ''}}">
               <i class="fas fa-clock"></i>
               <p>
                 Setting Jam
@@ -67,10 +67,18 @@
             </a>
           </li>
           <li class="nav-item {{Request()->is('qrcode') ? 'active' : ''}}">
-            <a href="qrcode" class="nav-link {{Request()->is('qrcode') ? 'active' : ''}}">
+            <a href="/qrcode" class="nav-link {{Request()->is('qrcode') ? 'active' : ''}}">
               <i class="fas fa-qrcode"></i>
               <p>
                 QR Scan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item {{Request()->is('pengguna') ? 'active' : ''}}">
+            <a href="/pengguna" class="nav-link {{Request()->is('pengguna') ? 'active' : ''}}">
+              <i class="fas fa-users"></i>
+              <p>
+                Pengguna
               </p>
             </a>
           </li>
