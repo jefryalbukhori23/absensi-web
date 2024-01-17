@@ -13,7 +13,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::where('role','admin')->get();
         return response()->json([
             'data' => $data
         ], 200);
@@ -55,7 +55,8 @@ class userController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = User::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -63,10 +64,7 @@ class userController extends Controller
      */
     public function edit(string $id)
     {
-        $data = User::find($id);
-        return response()->json([
-            'data' => $data
-        ], 200);
+
     }
 
     /**
@@ -76,10 +74,16 @@ class userController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
         ]);
 
-        $data = new User();
+        
+        $data = User::find($id);
+        if($data->email !== $request->email)
+        {
+            $request->validate([
+                'email' => 'email|unique:users',
+            ]);
+        }
         $data->name = $request->name;
         $data->email = $request->email;
         if($request->password){

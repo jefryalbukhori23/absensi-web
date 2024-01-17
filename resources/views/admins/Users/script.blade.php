@@ -123,16 +123,16 @@
                         '@method('PUT')' +
                         '<div class="form-group">' +
                         '<label for="recipient-name" class="col-form-label">Nama</label>' +
-                        '<input type="text" class="form-control" id="school_name" name="name"' +
+                        '<input type="text" class="form-control" value="'+response.name+'" id="school_name" name="name"' +
                         'placeholder="Nama">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="recipient-name" class="col-form-label">Email</label>' +
-                        '<input type="email" class="form-control" id="email" name="email" placeholder="Email">' +
+                        '<input type="email" class="form-control" value="'+response.email+'" id="email" name="email" placeholder="Email">' +
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="recipient-name" class="col-form-label">Password</label>' +
-                        '<input type="password" class="form-control" id="email" name="password" placeholder="Password">' +
+                        '<input type="password" class="form-control" id="email" name="password" placeholder="...............">' +
                         '</div>' +
                         '<div><button type="submit" class="btn btn-primary">Edit</button></div>' +
                         '</form>'
@@ -237,44 +237,67 @@
             var id = $(this).data('id');
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-            // Tampilkan konfirmasi penghapusan menggunakan Swal Alert
-            Swal.fire({
-                title: 'Konfirmasi Hapus',
-                text: 'Anda yakin ingin menghapus data ini?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika pengguna mengonfirmasi penghapusan, kirim permintaan Ajax ke server untuk menghapus data
-                    $.ajax({
-                        url: '/users/' + id,
-                        type: 'DELETE',
-                        headers: {
-                            // Menambahkan token CSRF ke header permintaan
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        success: function(response) {
-                            console.log(
-                                response); // Menampilkan respons dari server
-                            Swal.fire('Berhasil', 'Data berhasil dihapus',
-                                'success');
-                            table.ajax.reload();
-                            // location.reload();
+            $.ajax({
+                url: '/cek_users/' + id,
+                type: 'GET',
+                success: function(response) {
+                    if (response == 'success') {
+                        // Tampilkan konfirmasi penghapusan menggunakan Swal Alert
+                        Swal.fire({
+                            title: 'Konfirmasi Hapus',
+                            text: 'Anda yakin ingin menghapus data ini?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Ya, Hapus',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Jika pengguna mengonfirmasi penghapusan, kirim permintaan Ajax ke server untuk menghapus data
+                                $.ajax({
+                                    url: '/users/' + id,
+                                    type: 'DELETE',
+                                    headers: {
+                                        // Menambahkan token CSRF ke header permintaan
+                                        'X-CSRF-TOKEN': csrfToken
+                                    },
+                                    success: function(response) {
+                                        console.log(
+                                            response
+                                        ); // Menampilkan respons dari server
+                                        Swal.fire('Berhasil',
+                                            'Data berhasil dihapus',
+                                            'success');
+                                        table.ajax.reload();
+                                        // location.reload();
 
-                        },
-                        error: function(error) {
-                            console.log(
-                                error
-                            ); // Menampilkan pesan error jika permintaan gagal
-                            Swal.fire('Error',
-                                'Terjadi kesalahan saat menghapus data, Coba lagi nanti',
-                                'error', 900);
-                        }
-                    });
+                                    },
+                                    error: function(error) {
+                                        console.log(
+                                            error
+                                        ); // Menampilkan pesan error jika permintaan gagal
+                                        Swal.fire('Error',
+                                            'Terjadi kesalahan saat menghapus data, Coba lagi nanti',
+                                            'error', 900);
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        Swal.fire('Tidak Dapat Menghapus Data',
+                            'Akun Ini Tidak Dapat Dihapus karena Kamu login menggunakan akun ini',
+                            'warning');
+                    }
+
+                },
+                error: function(error) {
+                    console.log(
+                        error
+                    ); // Menampilkan pesan error jika permintaan gagal
+                    Swal.fire('Error',
+                        'Terjadi kesalahan, Coba lagi nanti',
+                        'error', 900);
                 }
             });
         });

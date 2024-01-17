@@ -14,4 +14,13 @@ class ProfilController extends Controller
     {
         return view('admins.users.index');
     }
+    public function cek_users($id)
+    {
+        if(auth()->user()->id == $id)
+        {
+            return response()->json('error');
+        }else{
+            return response()->json('success');
+        }
+    }
 }
