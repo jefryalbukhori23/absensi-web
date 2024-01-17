@@ -10,7 +10,7 @@
         Admin
       </div>
       <div class="dropdown-menu custom" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/profile">Profile</a>
+        <a class="dropdown-item" href="/profil-admin">Profile</a>
         <a class="dropdown-item" href="/logout">Logout</a>
       </div>
     </div>

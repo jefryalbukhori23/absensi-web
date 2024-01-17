@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Absensi Magang | Profil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('assets/customUser.css')}}">
@@ -38,14 +38,14 @@
                 <div class="relative">
                     <i class="fa-solid fa-user absolute text-color1 right-1 top-10 w-[20px] h-[20px]"></i>
                     <label for="" class="text-[16px] Inter font-normal text-color1">username</label>
-                    <input type="text" name="" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
+                    <input type="text" name="" value="{{ auth()->user()->name }}" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
                 </div>
                 <div class="relative my-4">
                     <i class="fa-solid fa-eye absolute text-color1 right-1 top-10 w-[20px] h-[20px]"></i>
                     <label for="" class="text-[16px] Inter font-normal text-color1">Password</label>
-                    <input type="password" name="" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="User">
+                    <input type="password" value="............" name="" id="" class="w-full rounded-[10px] bg-white border border-color1 Inter font-normal text-[16px] text-color2 px-[20px] py-[10px]" placeholder="">
                 </div>
-                <div class="rounded-[10px] bg-color1 px-16 py-4 text-white Poppins text-[19px] font-medium">
+                <div onclick="window.location.href='/logout';" style="cursor: pointer" class="rounded-[10px] bg-color1 px-16 py-4 text-white Poppins text-[19px] font-medium">
                     Logout
                 </div>
             </div>
