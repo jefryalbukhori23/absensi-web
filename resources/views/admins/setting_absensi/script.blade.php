@@ -61,7 +61,7 @@
                         '</div>' +
                         '<div class="form-group">' +
                         '<label for="nisn">Latitude Kantor:</label>' +
-                        '<input type="number" class="form-control" id="nisn" value="' +
+                        '<input type="text" class="form-control" id="nisn" value="' +
                         response.office_latitude + '" name="office_latitude">' +
                         '</div>' +
                         '<div class="form-group">' +

@@ -11,6 +11,7 @@ class absensiController extends Controller
 {
     public function absen(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
         $request->validate([
             'img' => 'required|image|mimes:jpg,png,jpeg|max:2048',
             'latitude' => 'required',
@@ -44,6 +45,7 @@ class absensiController extends Controller
 
     public function get_jml_siswa()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $sett = absensi_setting::find(1);
         $now = date('H:i:s');
         $absensi = absensi::where('date',date('Y-m-d'))->first();
@@ -67,6 +69,7 @@ class absensiController extends Controller
 
     public function get_data_absensi()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $absensi = absensi::where('date',date('Y-m-d'))->first();
         if(!$absensi)
         {
@@ -100,6 +103,7 @@ class absensiController extends Controller
 
     public function get_data_absensi_persekolah()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $absensi = absensi::where('date',date('Y-m-d'))->first();
         if(!$absensi)
         {

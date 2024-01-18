@@ -57,4 +57,34 @@ class scanController extends Controller
             ], 200);
         }
     }
+
+    public function cek_photo()
+    {
+        $student = students::where('id_user',auth()->user()->id)->first();
+        $data = scaninfo::where('id_students',$student->id)->latest()->first();
+        if($data)
+        {
+            if($data->status == 'S'){
+                $data->delete();
+                return response()->json([
+                    'status'=>'S'
+                ], 200);
+            }else if($data->status == 'GL'){
+                $data->delete();
+                return response()->json([
+                    'status' => 'GL'
+                ], 200);
+            }else if($data->status == 'GI')
+            {
+                $data->delete();
+                return response()->json([
+                    'status' => 'GI'
+                ], 200);
+            }
+        }else{
+            return response()->json([
+                'status' => 'TA'
+            ], 200);
+        }
+    }
 }

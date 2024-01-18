@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('scaninfos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_students');
-            $table->string('status'); // C (cocok) // S (sudah Absen) // G (gagal)
+            $table->string('status'); // C (cocok) // S (sudah Absen) // G (gagal) // F (Foto) // P (Sudah Cek)
             $table->timestamps();
         });
     }

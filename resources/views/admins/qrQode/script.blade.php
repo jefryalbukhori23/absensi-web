@@ -78,8 +78,13 @@
             success: function(data) {
                 if(data.msg == 'success')
                 {
+                    var overlay = $('.fullscreen-overlay');
+                    var loadingIcon = $('.loading-container');
+
+                    overlay.show(); // Menampilkan layar penuh
+                    loadingIcon.show(); // Menampilkan indikator loading
                     // alert('ada', data.data.fullname)
-                    window.location.href="/foto/"+data.data.id+'/'+data.scan.id;
+                    window.location.href="/FaceScan/"+data.data.id+'/'+data.scan.id;
                 }
             },
             error: function(error) {

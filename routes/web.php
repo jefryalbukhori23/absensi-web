@@ -37,8 +37,6 @@ Route::get('/qrCode', [qrController::class, 'index']);
 Route::get('/absen', [qrController::class, 'absen']);
 // Route::get('/sekolah', [pagesController::class, 'sekolah']);
 Route::get('/absen', [qrController::class, 'absen'])->name('absen');
-Route::get('/FaceScan', [FaceRecognitionController::class, 'index']);
-Route::post('/save-image', [FaceRecognitionController::class, 'saveImage']);
 
 Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/', [dashboardUser::class, 'index']);
@@ -61,9 +59,12 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/per-sekolah', [pagesController::class, 'perSekolah']);
     Route::get('/qrcode', [pagesController::class, 'qrCode']);
     Route::get('/cek_scan', [scanController::class, 'cekscan']);
+    Route::get('/FaceScan/{id}/{kode}', [FaceRecognitionController::class, 'index']);
+    Route::post('/save-image', [FaceRecognitionController::class, 'saveImage']);
 });
 Route::group(['middleware' => ['auth', 'hakakses:student']], function () {
     Route::get('/profil-user', [testController::class, 'profilUser']);
     Route::get('/cameraScan', [scanController::class, 'scan']);
     Route::get('/addscan/{kode}', [scanController::class, 'addscan']);
+    Route::get('/cek_photo', [scanController::class, 'cek_photo']);
 });
