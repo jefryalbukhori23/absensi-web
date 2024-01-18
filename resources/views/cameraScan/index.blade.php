@@ -5,12 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: black;
+            overflow: hidden;
+        }
+        .camera {
+            width: auto;
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-    <video id="preview"></video>
-    <div id="resultText"></div>
+    <video class="camera" id="preview"></video>
+    <!-- <div id="resultText"></div> -->
 
     <!-- Add this in your Blade view file -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
