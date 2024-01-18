@@ -4,6 +4,7 @@ use App\Http\Controllers\absensiController;
 use App\Http\Controllers\absensiSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardUser;
+use App\Http\Controllers\FaceRecognitionController;
 use App\Http\Controllers\qrController;
 use App\Http\Controllers\pagesController;
 use App\Http\Controllers\ProfilController;
@@ -36,6 +37,8 @@ Route::get('/qrCode', [qrController::class, 'index']);
 Route::get('/absen', [qrController::class, 'absen']);
 // Route::get('/sekolah', [pagesController::class, 'sekolah']);
 Route::get('/absen', [qrController::class, 'absen'])->name('absen');
+Route::get('/FaceScan', [FaceRecognitionController::class, 'index']);
+Route::post('/save-image', [FaceRecognitionController::class, 'saveImage']);
 
 Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/', [dashboardUser::class, 'index']);
